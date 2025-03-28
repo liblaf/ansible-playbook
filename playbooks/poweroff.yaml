@@ -1,0 +1,11 @@
+# This playbook is used to shut down all remote servers in the inventory.
+
+- name: Shutdown all remote servers # Descriptive name for the playbook
+  hosts: all # Specifies that the playbook will target all hosts in the inventory
+  become: true # Ensures the tasks are executed with elevated privileges (sudo)
+  tasks:
+    - name: Power off the server # Descriptive name for the task
+      ansible.builtin.command: # Uses the command module to execute a shell command
+        cmd: systemctl poweroff # Command to power off the server
+      async: 1 # Runs the task asynchronously, allowing the playbook to move on without waiting
+      poll: 0 # Disables polling, so the playbook doesn't wait for the task to complete

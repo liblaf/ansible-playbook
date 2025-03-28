@@ -1,0 +1,8 @@
+# This Ansible playbook checks if the user has sudo privileges on the target hosts.
+- name: Check if user has sudo privileges # Descriptive name for the playbook
+  hosts: all # Specifies that this playbook will run on all target hosts
+  tasks: # List of tasks to execute
+    - name: Check sudo access # Task to verify sudo privileges
+      become: true # Escalates privileges to sudo for this task
+      command: sudo --list # Runs the command to list sudo privileges
+      register: result # Stores the output of the command in a variable named 'result'

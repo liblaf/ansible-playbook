@@ -1,0 +1,21 @@
+# Ansible Playbook to create a new user on remote servers
+
+- name: Create a new user on remote servers
+  hosts: all # Specifies that this playbook will run on all hosts in the inventory
+  become: true # Ensures the tasks are executed with elevated privileges (sudo)
+
+  vars:
+    new_user: "exampleuser" # Define the username for the new user
+    user_shell: "/bin/bash" # Define the default shell for the new user
+
+  tasks:
+    # Task to create a new user
+    - name: Ensure the user exists
+      ansible.builtin.user:
+        name: "{{ new_user }}" # Use the variable for the username
+        password: "{{ 'password' | password_hash('sha512') }}" # Set a temporary password for the user
+        shell: "/bin/bash"
+        state: present # Ensure the user is created
+        createhome: true
+        home: "/home/{{ new_user }}" # Define the home directory for the user
+        group: sudo # Add the user to the 'sudo' group

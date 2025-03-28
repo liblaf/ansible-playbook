@@ -1,0 +1,21 @@
+---
+# This is an Ansible Playbook to install packages using apt package manager.
+
+- name: Install packages using apt
+  hosts: all # Specifies that this playbook will run on all target hosts
+  become: true # Ensures the playbook runs with sudo privileges
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes # Updates the package cache
+      # This task ensures the package list is up-to-date before installing anything
+
+    - name: Install desired packages
+      apt:
+        name: # List of packages to install
+          - git
+          - curl
+          - vim
+        state: present # Ensures the packages are installed
+      # Replace the package names above with the ones you need
