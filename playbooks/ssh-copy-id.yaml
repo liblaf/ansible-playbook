@@ -13,7 +13,6 @@
         dest: ~/.ssh/authorized_keys
         owner: "{{ ansible_user }}"
         mode: "0600"
-      remote_src: no
     - name: Ensure correct permissions on the authorized_keys file
       file:
         path: ~/.ssh/authorized_keys

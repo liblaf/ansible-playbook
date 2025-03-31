@@ -14,8 +14,6 @@
     - name: Install desired packages
       apt:
         name: # List of packages to install
-          - git
-          - curl
-          - vim
+          - nmap
         state: present # Ensures the packages are installed
       # Replace the package names above with the ones you need
